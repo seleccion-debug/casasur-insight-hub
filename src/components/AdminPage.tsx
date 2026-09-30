@@ -248,7 +248,7 @@ export default function AdminPage() {
           </div>
 
           {/* Active tab content */}
-          <SectorReportView tab={SECTOR_TABS[activeTab]} periodo={periodo} />
+          <SectorReportView tab={SECTOR_TABS[activeTab] ?? SECTOR_TABS[0]!} periodo={periodo} />
         </div>
       </main>
 

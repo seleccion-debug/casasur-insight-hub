@@ -138,7 +138,7 @@ export function getPreviousPeriod(currentPeriod: string): string | null {
   const match = currentPeriod.match(/(Enero|Julio) (\d{4})/);
   if (!match) return null;
   const [, sem, yearStr] = match;
-  const year = parseInt(yearStr, 10);
+  const year = parseInt(yearStr ?? '', 10);
   if (sem === 'Julio') {
     return `Enero ${year}`;
   }

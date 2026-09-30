@@ -90,7 +90,7 @@ export async function fetchPlanAcciones(
     console.error('Error fetching plan acciones:', error.message);
     return [];
   }
-  return data ?? [];
+  return (data ?? []) as PlanAccion[];
 }
 
 export async function upsertPlanAccion(plan: PlanAccion): Promise<PlanAccion | null> {
@@ -105,7 +105,7 @@ export async function upsertPlanAccion(plan: PlanAccion): Promise<PlanAccion | n
       console.error('Error updating plan:', error.message);
       return null;
     }
-    return data;
+    return data as PlanAccion | null;
   } else {
     const { data, error } = await supabase
       .from('plan_accion_seguimiento')
@@ -116,7 +116,7 @@ export async function upsertPlanAccion(plan: PlanAccion): Promise<PlanAccion | n
       console.error('Error inserting plan:', error.message);
       return null;
     }
-    return data;
+    return data as PlanAccion | null;
   }
 }
 

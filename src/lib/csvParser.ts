@@ -114,7 +114,7 @@ function parseLikertValue(raw: string): number | null {
   // Try extracting a leading number (e.g. "1 - Muy en desacuerdo")
   const match = trimmed.match(/^(\d)/);
   if (match) {
-    const n = parseInt(match[1], 10);
+    const n = parseInt(match[1] ?? '', 10);
     if (n >= 1 && n <= 5) return n;
   }
 
@@ -284,7 +284,7 @@ export function parseCSVToRespuestas(
     periodoIdx,
     beneficiosIdx,
     comentariosIdx,
-  } = buildHeaderMapping(headers);
+  } = buildHeaderMapping(headers ?? []);
 
   if (hotelIdx === -1) {
     result.errors.push('No se encontró la columna "Hotel" en el CSV.');
@@ -299,7 +299,7 @@ export function parseCSVToRespuestas(
   if (result.errors.length > 0) return result;
 
   for (let i = 1; i < rows.length; i++) {
-    const row = rows[i];
+    const row = rows[i] ?? [];
     result.totalRows++;
 
     const hotel = hotelIdx >= 0 ? normalizeHotel(row[hotelIdx] ?? '') : '';
@@ -311,7 +311,7 @@ export function parseCSVToRespuestas(
       continue;
     }
 
-    const periodo = periodoIdx >= 0 && row[periodoIdx]?.trim() ? row[periodoIdx].trim() : defaultPeriodo;
+    const periodo = periodoIdx >= 0 && row[periodoIdx]?.trim() ? (row[periodoIdx] as string).trim() : defaultPeriodo;
     const nombre = nombreIdx >= 0 ? (row[nombreIdx]?.trim() || null) : null;
     const beneficios = beneficiosIdx >= 0 ? (row[beneficiosIdx]?.trim() || null) : null;
     const comentarios = comentariosIdx >= 0 ? (row[comentariosIdx]?.trim() || null) : null;
