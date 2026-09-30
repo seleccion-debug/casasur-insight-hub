@@ -8,3 +8,7 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Arquitectura del proyecto
+- Las pantallas viven en `src/components/SurveyPage.tsx` y `src/components/AdminPage.tsx`; las rutas (`src/routes/index.tsx`, `encuesta.tsx`, `admin.tsx`) sólo las envuelven — TanStack Router no admite un directorio `src/pages` de rutas.
+- La lógica de datos y puntajes está centralizada en `src/lib/` (api, constants, scoring, csvParser) para que reportes y encuesta compartan una única fuente de verdad.
