@@ -111,9 +111,6 @@ export default function AdminPage() {
             </button>
           </div>
         </div>
-        <footer className="mt-6 flex justify-center">
-          <Logo variant="horizontal" />
-        </footer>
       </div>
     );
   }
