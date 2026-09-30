@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from '@tanstack/react-router';
-import { Lock, LogOut, BarChart3, Calendar, Upload } from 'lucide-react';
+import { LogOut, BarChart3, Calendar, Upload } from 'lucide-react';
 import Logo from '@/components/Logo';
 import SectorReportView from '@/components/SectorReportView';
 import { OverviewCards } from '@/components/ScoreCard';
@@ -67,12 +67,9 @@ export default function AdminPage() {
       <div className="min-h-screen bg-cream-100 flex items-center justify-center px-4">
         <div className="cs-card max-w-md w-full p-8 animate-slide-up">
           <div className="flex justify-center mb-6">
-            <Logo variant="circle" />
+            <Logo variant="circle" size="lg" />
           </div>
           <div className="mb-6 text-center">
-            <div className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-cream-200 mb-3">
-              <Lock className="h-7 w-7 text-gold" />
-            </div>
             <h1 className="font-serif text-2xl text-charcoal-900 mb-1">Acceso Administrativo</h1>
             <p className="text-sm text-neutral-elegant">
               Ingresa el PIN para acceder al dashboard de resultados.
@@ -111,9 +108,6 @@ export default function AdminPage() {
             </button>
           </div>
         </div>
-        <footer className="mt-6 flex justify-center">
-          <Logo variant="horizontal" />
-        </footer>
       </div>
     );
   }
