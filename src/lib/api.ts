@@ -1,4 +1,4 @@
-import { supabase } from './supabase';
+import { supabase } from '@/integrations/supabase/client';
 import type { RespuestaEncuesta, PlanAccion } from './types';
 
 export async function insertRespuesta(data: RespuestaEncuesta): Promise<{ error: string | null }> {

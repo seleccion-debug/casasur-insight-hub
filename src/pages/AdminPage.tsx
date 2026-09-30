@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@tanstack/react-router';
 import { Lock, LogOut, BarChart3, Calendar, Upload } from 'lucide-react';
 import Logo from '@/components/Logo';
 import SectorReportView from '@/components/SectorReportView';
@@ -104,7 +104,7 @@ export default function AdminPage() {
 
           <div className="mt-6 text-center">
             <button
-              onClick={() => navigate('/encuesta')}
+              onClick={() => navigate({ to: '/encuesta' })}
               className="text-xs text-neutral-elegant hover:text-gold transition-colors"
             >
               Volver a la encuesta

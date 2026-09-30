@@ -1,11 +1,15 @@
+import { useState } from 'react';
+
 interface LogoProps {
   variant?: 'circle' | 'horizontal';
   size?: 'sm' | 'md' | 'lg';
   className?: string;
 }
 
-const CIRCLE_LOGO_URL = '/assets/images/logo_CS_negro_sobre_blanco_(1).png';
-const HORIZONTAL_LOGO_URL = '/assets/images/Casa_Sur_PNG_-_letras_negras_(1).png';
+// Fixed locations. If these files are absent from public/, an elegant
+// serif fallback is rendered instead.
+const CIRCLE_LOGO_URL = '/logo-casasur-circular.png';
+const HORIZONTAL_LOGO_URL = '/logo-casasur-horizontal.png';
 
 const CIRCLE_SIZES: Record<string, string> = {
   sm: 'h-12 w-12',
@@ -19,13 +23,24 @@ const HORIZONTAL_SIZES: Record<string, string> = {
   lg: 'h-12 max-w-[260px]',
 };
 
-function LogoFallback({ compact = false }: { compact?: boolean }) {
+function CircleFallback({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
+  const textSize = size === 'sm' ? 'text-sm' : size === 'lg' ? 'text-xl' : 'text-lg';
   return (
-    <div className={`flex items-center justify-center ${compact ? '' : 'flex-col'}`}>
-      <span className={`${compact ? 'text-xl' : 'text-2xl'} font-serif tracking-wider text-charcoal-900`}>
-        CASASUR
-      </span>
-      <span className={`${compact ? 'ml-2' : 'mt-1'} font-serif text-xs tracking-[0.25em] text-gold uppercase`}>
+    <div
+      className={`${CIRCLE_SIZES[size]} flex items-center justify-center rounded-full border border-gold bg-white`}
+      aria-label="CasaSur"
+    >
+      <span className={`font-serif ${textSize} tracking-wide text-charcoal-900`}>C/S</span>
+    </div>
+  );
+}
+
+function HorizontalFallback({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
+  const textSize = size === 'sm' ? 'text-lg' : size === 'lg' ? 'text-3xl' : 'text-2xl';
+  return (
+    <div className="flex flex-col items-center" aria-label="CASASUR Hotel Collection">
+      <span className={`font-serif ${textSize} tracking-[0.3em] text-charcoal-900`}>CASASUR</span>
+      <span className="font-serif text-[0.6rem] uppercase tracking-[0.35em] text-gold">
         Hotel Collection®
       </span>
     </div>
@@ -33,39 +48,25 @@ function LogoFallback({ compact = false }: { compact?: boolean }) {
 }
 
 export default function Logo({ variant = 'circle', size = 'md', className = '' }: LogoProps) {
-  if (variant === 'circle') {
+  const [failed, setFailed] = useState(false);
+  const isCircle = variant === 'circle';
+
+  if (failed) {
     return (
-      <div className={`flex flex-col items-center justify-center ${className}`}>
-        <img
-          src={CIRCLE_LOGO_URL}
-          alt="CasaSur Hotel Collection"
-          className={`${CIRCLE_SIZES[size]} object-contain`}
-          onError={(event) => {
-            event.currentTarget.style.display = 'none';
-            event.currentTarget.nextElementSibling?.classList.remove('hidden');
-          }}
-        />
-        <div className="hidden">
-          <LogoFallback />
-        </div>
+      <div className={`flex items-center justify-center ${className}`}>
+        {isCircle ? <CircleFallback size={size} /> : <HorizontalFallback size={size} />}
       </div>
     );
   }
 
   return (
-    <div className={`flex items-center ${className}`}>
+    <div className={`flex items-center justify-center ${className}`}>
       <img
-        src={HORIZONTAL_LOGO_URL}
+        src={isCircle ? CIRCLE_LOGO_URL : HORIZONTAL_LOGO_URL}
         alt="CasaSur Hotel Collection"
-        className={`${HORIZONTAL_SIZES[size]} object-contain`}
-        onError={(event) => {
-          event.currentTarget.style.display = 'none';
-          event.currentTarget.nextElementSibling?.classList.remove('hidden');
-        }}
+        className={`${isCircle ? CIRCLE_SIZES[size] : HORIZONTAL_SIZES[size]} object-contain`}
+        onError={() => setFailed(true)}
       />
-      <div className="hidden">
-        <LogoFallback compact />
-      </div>
     </div>
   );
 }

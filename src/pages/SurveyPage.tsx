@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@tanstack/react-router';
 import { Lock, Unlock, Send, CheckCircle2, Calendar, ChevronRight } from 'lucide-react';
 import Logo from '@/components/Logo';
 import LikertScale from '@/components/LikertScale';
@@ -102,7 +102,7 @@ export default function SurveyPage() {
             Periodo: <span className="font-medium text-charcoal-800">{currentPeriod}</span>
           </p>
           <button
-            onClick={() => navigate(0)}
+            onClick={() => window.location.reload()}
             className="cs-btn-primary"
           >
             Volver al inicio
@@ -355,7 +355,7 @@ export default function SurveyPage() {
           CasaSur Hotel Collection — Encuesta de Clima Laboral {currentPeriod}
         </p>
         <button
-          onClick={() => navigate('/admin')}
+          onClick={() => navigate({ to: '/admin' })}
           className="mt-2 text-xs text-neutral-elegant hover:text-gold transition-colors"
         >
           Acceso administrativo
