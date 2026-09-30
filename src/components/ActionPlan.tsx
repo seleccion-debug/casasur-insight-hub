@@ -1,12 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
 import { CheckCircle2, Circle, Clock, Trash2, Plus, ChevronDown, ChevronUp } from 'lucide-react';
-import type { PlanAccion, SectorReport, RespuestaEncuesta } from '@/lib/types';
+import type { PlanAccion, SectorReport } from '@/lib/types';
 import {
   fetchPlanAcciones,
   upsertPlanAccion,
   bulkInsertPlanes,
   deletePlanAccion,
-  fetchRespuestasBySector,
 } from '@/lib/api';
 import {
   ACTION_SUGGESTIONS,
