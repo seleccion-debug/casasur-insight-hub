@@ -14,7 +14,147 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      plan_accion_seguimiento: {
+        Row: {
+          accion_sugerida: string
+          created_at: string
+          estado: string
+          frecuencia: string
+          hotel: string
+          id: string
+          kpi_medicion: string | null
+          notas_seguimiento: string | null
+          periodo: string
+          prioridad: number
+          programa: string
+          responsable: string | null
+          sector: string
+          variable_afectada: string
+        }
+        Insert: {
+          accion_sugerida: string
+          created_at?: string
+          estado?: string
+          frecuencia?: string
+          hotel: string
+          id?: string
+          kpi_medicion?: string | null
+          notas_seguimiento?: string | null
+          periodo: string
+          prioridad?: number
+          programa: string
+          responsable?: string | null
+          sector: string
+          variable_afectada: string
+        }
+        Update: {
+          accion_sugerida?: string
+          created_at?: string
+          estado?: string
+          frecuencia?: string
+          hotel?: string
+          id?: string
+          kpi_medicion?: string | null
+          notas_seguimiento?: string | null
+          periodo?: string
+          prioridad?: number
+          programa?: string
+          responsable?: string | null
+          sector?: string
+          variable_afectada?: string
+        }
+        Relationships: []
+      }
+      respuestas_encuesta: {
+        Row: {
+          com_beneficios_deseados: string | null
+          com_experiencia_general: number | null
+          comentarios_observaciones: string | null
+          fecha_envio: string
+          hotel: string
+          id: string
+          mot_aprender_crecer: number | null
+          mot_capacitaciones: number | null
+          mot_mentor_guia: number | null
+          mot_motivacion_general: number | null
+          mot_objetivos_claros: number | null
+          mot_tareas_variadas: number | null
+          nombre_completo: string | null
+          periodo: string
+          rel_ambiente_trabajo: number | null
+          rel_colaboracion_deptos: number | null
+          rel_colaboracion_equipo: number | null
+          rel_comunicacion_clara: number | null
+          rel_conforme_lider: number | null
+          rel_resolucion_conflictos: number | null
+          rel_respeto_companeros: number | null
+          sector: string
+          val_distribucion_justa: number | null
+          val_expresar_ideas: number | null
+          val_feedback: number | null
+          val_reconocimiento: number | null
+          val_satisfaccion_desempeno: number | null
+        }
+        Insert: {
+          com_beneficios_deseados?: string | null
+          com_experiencia_general?: number | null
+          comentarios_observaciones?: string | null
+          fecha_envio?: string
+          hotel: string
+          id?: string
+          mot_aprender_crecer?: number | null
+          mot_capacitaciones?: number | null
+          mot_mentor_guia?: number | null
+          mot_motivacion_general?: number | null
+          mot_objetivos_claros?: number | null
+          mot_tareas_variadas?: number | null
+          nombre_completo?: string | null
+          periodo: string
+          rel_ambiente_trabajo?: number | null
+          rel_colaboracion_deptos?: number | null
+          rel_colaboracion_equipo?: number | null
+          rel_comunicacion_clara?: number | null
+          rel_conforme_lider?: number | null
+          rel_resolucion_conflictos?: number | null
+          rel_respeto_companeros?: number | null
+          sector: string
+          val_distribucion_justa?: number | null
+          val_expresar_ideas?: number | null
+          val_feedback?: number | null
+          val_reconocimiento?: number | null
+          val_satisfaccion_desempeno?: number | null
+        }
+        Update: {
+          com_beneficios_deseados?: string | null
+          com_experiencia_general?: number | null
+          comentarios_observaciones?: string | null
+          fecha_envio?: string
+          hotel?: string
+          id?: string
+          mot_aprender_crecer?: number | null
+          mot_capacitaciones?: number | null
+          mot_mentor_guia?: number | null
+          mot_motivacion_general?: number | null
+          mot_objetivos_claros?: number | null
+          mot_tareas_variadas?: number | null
+          nombre_completo?: string | null
+          periodo?: string
+          rel_ambiente_trabajo?: number | null
+          rel_colaboracion_deptos?: number | null
+          rel_colaboracion_equipo?: number | null
+          rel_comunicacion_clara?: number | null
+          rel_conforme_lider?: number | null
+          rel_resolucion_conflictos?: number | null
+          rel_respeto_companeros?: number | null
+          sector?: string
+          val_distribucion_justa?: number | null
+          val_expresar_ideas?: number | null
+          val_feedback?: number | null
+          val_reconocimiento?: number | null
+          val_satisfaccion_desempeno?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
