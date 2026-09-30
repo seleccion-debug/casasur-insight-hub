@@ -5,17 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design system definition.
- *
- * The @theme inline block maps CSS custom properties to Tailwind utility
- * classes (e.g. --color-primary -> bg-primary, text-primary).
- *
- * The :root and .dark blocks define the actual color values using oklch.
- * All colors MUST use oklch format.
- *
- * To add a new semantic color:
- * 1. Add the variable to :root (light value) and .dark (dark value)
- * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ * CasaSur Hotel Collection design system.
+ * All brand colors, fonts and animations live here as tokens.
  */
 
 @theme inline {
@@ -46,90 +37,109 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@theme {
+  /* Brand palette */
+  --color-cream: #fbf9f5;
+  --color-cream-50: #fdfcfa;
+  --color-cream-100: #fbf9f5;
+  --color-cream-200: #f5f1e8;
+  --color-cream-300: #ede7d8;
+
+  --color-charcoal: #1a1a1a;
+  --color-charcoal-900: #111111;
+  --color-charcoal-800: #1a1a1a;
+  --color-charcoal-700: #2d2d2d;
+  --color-charcoal-600: #404040;
+  --color-charcoal-500: #525252;
+
+  --color-neutral-elegant: #707070;
+  --color-neutral-border: #e8e6e1;
+  --color-neutral-light: #f5f4f0;
+
+  --color-gold: #c5a880;
+  --color-gold-light: #d4bc9a;
+  --color-gold-dark: #b5986c;
+  --color-gold-50: #faf6f0;
+  --color-gold-100: #f5ede0;
+  --color-gold-200: #ebd9c0;
+  --color-gold-300: #dcc59f;
+  --color-gold-400: #c5a880;
+  --color-gold-500: #b5986c;
+  --color-gold-600: #a08256;
+  --color-gold-700: #8b6f48;
+
+  --color-success: #3b7a57;
+  --color-success-light: #e8f5ee;
+  --color-success-50: #f0f8f4;
+
+  --color-warning: #c7941a;
+  --color-warning-light: #fbf3e0;
+  --color-warning-50: #fdfaf3;
+
+  --color-danger: #b33a3a;
+  --color-danger-light: #fbeaea;
+  --color-danger-50: #fdf5f5;
+
+  --font-serif: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", Inter, system-ui, sans-serif;
+
+  --animate-fade-in: fadeIn 0.5s ease-in-out;
+  --animate-slide-up: slideUp 0.4s ease-out;
+  --animate-slide-down: slideDown 0.3s ease-out;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes slideUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes slideDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+  --foreground: oklch(0.176 0 0);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
+  --card-foreground: oklch(0.176 0 0);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
-}
-
-.dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
-  --card: oklch(0.208 0.042 265.755);
-  --card-foreground: oklch(0.984 0.003 247.858);
-  --popover: oklch(0.208 0.042 265.755);
-  --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
-  --muted: oklch(0.279 0.041 260.031);
-  --muted-foreground: oklch(0.704 0.04 256.788);
-  --accent: oklch(0.279 0.041 260.031);
-  --accent-foreground: oklch(0.984 0.003 247.858);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.551 0.027 264.364);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.208 0.042 265.755);
-  --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.551 0.027 264.364);
+  --popover-foreground: oklch(0.176 0 0);
+  --primary: oklch(0.176 0 0);
+  --primary-foreground: oklch(0.985 0.005 90);
+  --secondary: oklch(0.966 0.008 85);
+  --secondary-foreground: oklch(0.176 0 0);
+  --muted: oklch(0.966 0.008 85);
+  --muted-foreground: oklch(0.55 0.005 85);
+  --accent: oklch(0.78 0.055 75);
+  --accent-foreground: oklch(0.176 0 0);
+  --destructive: oklch(0.51 0.15 25);
+  --destructive-foreground: oklch(0.985 0.005 90);
+  --border: oklch(0.925 0.007 85);
+  --input: oklch(0.925 0.007 85);
+  --ring: oklch(0.78 0.055 75);
 }
 
 @layer base {
@@ -138,7 +148,65 @@
   }
 
   body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    background-color: #ffffff;
+    color: #1a1a1a;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-serif);
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer components {
+  .cs-input {
+    @apply w-full rounded-lg border border-neutral-border bg-white px-4 py-3 text-sm text-charcoal-800 transition-all
+           focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold
+           placeholder:text-neutral-elegant;
+  }
+
+  .cs-btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-charcoal-900 px-6 py-3 text-sm font-medium
+           text-white transition-all hover:bg-charcoal-700 active:scale-[0.98]
+           disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .cs-btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-neutral-border bg-white px-6 py-3
+           text-sm font-medium text-charcoal-800 transition-all hover:border-gold hover:bg-cream-100
+           active:scale-[0.98];
+  }
+
+  .cs-btn-gold {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-gold px-6 py-3 text-sm font-medium
+           text-white transition-all hover:bg-gold-dark active:scale-[0.98]
+           disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .cs-card {
+    @apply rounded-2xl border border-neutral-border bg-white shadow-sm;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #fbf9f5;
+}
+::-webkit-scrollbar-thumb {
+  background: #e8e6e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c5a880;
 }
