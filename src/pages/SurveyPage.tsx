@@ -3,7 +3,7 @@ import { useNavigate } from '@tanstack/react-router';
 import { Lock, Unlock, Send, CheckCircle2, Calendar, ChevronRight } from 'lucide-react';
 import Logo from '@/components/Logo';
 import LikertScale from '@/components/LikertScale';
-import { HOTELS, SECTORS, VARIABLES, isSurveyOpenNow, getNextOpenPeriod, getCurrentPeriod } from '@/lib/constants';
+import { HOTEL_OPTIONS, SECTORS, VARIABLES, isSurveyOpenNow, getNextOpenPeriod, getCurrentPeriod } from '@/lib/constants';
 import { insertRespuesta } from '@/lib/api';
 import type { RespuestaEncuesta } from '@/lib/types';
 
@@ -215,8 +215,8 @@ export default function SurveyPage() {
                   className="cs-input"
                 >
                   <option value="">Selecciona tu hotel...</option>
-                  {HOTELS.map((h) => (
-                    <option key={h} value={h}>{h}</option>
+                  {HOTEL_OPTIONS.map((h) => (
+                    <option key={h.value} value={h.value}>{h.label}</option>
                   ))}
                 </select>
               </div>
