@@ -2,6 +2,17 @@ import type { Hotel, Sector } from './types';
 
 export const HOTELS: Hotel[] = ['Recoleta', 'Palermo', 'Bellini', 'Hotel Collection'];
 
+// The 4 valid options shown in the "Hotel" dropdown of /encuesta.
+export const HOTEL_OPTIONS: { value: Hotel; label: string }[] = [
+  { value: 'Recoleta', label: 'Recoleta' },
+  { value: 'Palermo', label: 'Palermo' },
+  { value: 'Bellini', label: 'Bellini' },
+  {
+    value: 'Hotel Collection',
+    label: 'Hotel Collection (Comercial, RRHH, Administracion, Gerencia)',
+  },
+];
+
 export const SECTORS: Sector[] = [
   'Front',
   'Housekeeping',
