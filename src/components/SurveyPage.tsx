@@ -12,11 +12,12 @@ type FormState = Record<string, number | string | null>;
 export default function SurveyPage() {
   const navigate = useNavigate();
   const [overrideMode, setOverrideMode] = useState(false);
-  const surveyOpen = isSurveyOpenNow() || overrideMode;
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const surveyOpen = isSurveyOpenNow() || overrideMode || previewOpen;
   const currentPeriod = getCurrentPeriod();
   const nextPeriod = getNextOpenPeriod();
 
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(-1); // -1 = pantalla de bienvenida (botón para la encuesta)
   const [metadata, setMetadata] = useState({
     hotel: '',
     sector: '',
@@ -136,25 +137,37 @@ export default function SurveyPage() {
           <p className="text-neutral-elegant text-sm leading-relaxed mb-8">
             Próxima apertura: <span className="font-medium text-gold">{nextPeriod}</span>
           </p>
-          <div className="border-t border-neutral-border pt-4">
+        </div>
+        <footer className="mt-6 flex flex-col items-center gap-3">
+          <Logo variant="horizontal" size="sm" className="justify-center" />
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setPreviewOpen(true)}
+              className="text-[11px] text-neutral-elegant/60 hover:text-gold transition-colors"
+            >
+              Vista previa (enero / julio)
+            </button>
+            <span className="text-neutral-border/60">·</span>
             <button
               onClick={() => setOverrideMode(true)}
-              className="inline-flex items-center gap-1.5 text-xs text-neutral-elegant hover:text-charcoal-800 transition-colors"
+              className="text-[11px] text-neutral-elegant/60 hover:text-gold transition-colors"
             >
-              <Lock className="h-3 w-3" />
               Modo de prueba
-              <Unlock className="h-3 w-3 hidden group-hover:block" />
+            </button>
+            <span className="text-neutral-border/60">·</span>
+            <button
+              onClick={() => navigate({ to: '/admin' })}
+              className="text-[11px] text-neutral-elegant/60 hover:text-gold transition-colors"
+            >
+              Acceso administrativo
             </button>
           </div>
-        </div>
-        <footer className="mt-6 flex flex-col items-center">
-          <Logo variant="horizontal" size="sm" className="justify-center" />
         </footer>
       </div>
     );
   }
 
-  const progress = Math.round((step / totalSteps) * 100);
+  const progress = Math.max(0, Math.round((step / totalSteps) * 100));
 
   return (
     <div className="min-h-screen bg-cream-100">
@@ -188,6 +201,50 @@ export default function SurveyPage() {
         {error && (
           <div className="mb-4 rounded-lg bg-danger-50 border border-danger/30 px-4 py-3 text-sm text-danger">
             {error}
+          </div>
+        )}
+
+        {/* Pantalla de bienvenida con botón para la encuesta */}
+        {step === -1 && (
+          <div className="animate-slide-up">
+            <div className="cs-card max-w-xl mx-auto p-8 sm:p-10 text-center">
+              <div className="mb-6 flex justify-center">
+                <Logo variant="circle" size="md" />
+              </div>
+              <p className="text-xs uppercase tracking-widest text-gold mb-2">
+                Clima Laboral · {currentPeriod}
+              </p>
+              <h1 className="font-serif text-3xl sm:text-4xl text-charcoal-900 mb-4">
+                Encuesta de Clima Laboral
+              </h1>
+              <p className="text-sm text-neutral-elegant leading-relaxed max-w-md mx-auto mb-8">
+                Tu opinión es anónima y confidencial. Nos ayuda a mejorar tu entorno
+                de trabajo en CasaSur Hotel Collection. Toma menos de 5 minutos.
+              </p>
+              <button
+                onClick={() => {
+                  setStep(0);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="cs-btn-gold w-full sm:w-auto"
+              >
+                Comenzar encuesta
+                <ChevronRight className="h-4 w-4" />
+              </button>
+              {previewOpen && !isSurveyOpenNow() && (
+                <div className="mt-6 border-t border-neutral-border pt-4">
+                  <button
+                    onClick={() => {
+                      setPreviewOpen(false);
+                      setStep(-1);
+                    }}
+                    className="text-[11px] text-neutral-elegant/70 hover:text-charcoal-800 transition-colors"
+                  >
+                    Salir de la vista previa
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         )}
 
@@ -257,7 +314,7 @@ export default function SurveyPage() {
                 disabled={!canProceedMetadata}
                 className="cs-btn-primary"
               >
-                Comenzar encuesta
+                Continuar
                 <ChevronRight className="h-4 w-4" />
               </button>
             </div>

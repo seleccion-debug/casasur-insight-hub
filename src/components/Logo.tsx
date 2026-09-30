@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface LogoProps {
   variant?: 'circle' | 'horizontal';
@@ -49,7 +49,17 @@ function HorizontalFallback({ size = 'md' }: { size?: 'sm' | 'md' | 'lg' }) {
 
 export default function Logo({ variant = 'circle', size = 'md', className = '' }: LogoProps) {
   const [failed, setFailed] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
   const isCircle = variant === 'circle';
+
+  // Si la imagen ya falló antes de la hidratación, onError no se vuelve a
+  // disparar: verificamos el estado del elemento al montar.
+  useEffect(() => {
+    const img = imgRef.current;
+    if (img && img.complete && img.naturalWidth === 0) {
+      setFailed(true);
+    }
+  }, []);
 
   if (failed) {
     return (
@@ -62,6 +72,7 @@ export default function Logo({ variant = 'circle', size = 'md', className = '' }
   return (
     <div className={`flex items-center justify-center ${className}`}>
       <img
+        ref={imgRef}
         src={isCircle ? CIRCLE_LOGO_URL : HORIZONTAL_LOGO_URL}
         alt="CasaSur Hotel Collection"
         className={`${isCircle ? CIRCLE_SIZES[size] : HORIZONTAL_SIZES[size]} object-contain`}
